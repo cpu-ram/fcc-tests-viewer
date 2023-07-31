@@ -13,7 +13,7 @@ const srcFileDict = fs
     }
   ));
 
-const filterFccTestData = async (data) => {
+const filterFccExercisesData = async (data) => {
   const parsedObject = JSON.parse(data);
 
   const filteredData = Object
@@ -52,7 +52,7 @@ const recordFile = async (data, fileName) => {
 };
 
 srcFileDict.forEach(({ fileName, fileData }) => {
-  filterFccTestData(fileData)
+  filterFccExercisesData(fileData)
     .then((result) => {
       recordFile(result, fileName);
     });
