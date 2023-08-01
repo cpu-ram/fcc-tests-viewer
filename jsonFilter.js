@@ -75,15 +75,24 @@ const filterFccLogsData = async (data) => {
 
 const recordFile = async (data, fileName) => {
   await fs.writeFile(
-    `${resultsDirectory}/filtered-${fileName}`,
+    `${resultsDirectory}/{fileName}`,
     JSON.stringify(data),
     (err) => { if (err !== null) console.log(err); },
   );
 };
 
-srcFileDict.forEach(({ fileName, fileData }) => {
-  filterFccLogsData(fileData)
-    .then((result) => {
-      recordFile(result, `logs-${fileName}`);
-    });
+const filterData = ((filterFunc, purpose) => {
+  srcFileDict.forEach(({ fileName, fileData }) => {
+    filterFunc(fileData)
+      .then((result) => {
+        recordFile(result, `filtered-for-${purpose}-${fileName}`);
+      });
+  });
 });
+
+try {
+  filterData(filterFccLogsData, 'logs');
+  console.log('Data filtered!');
+} catch (err) {
+  console.log(err);
+}
