@@ -75,7 +75,7 @@ const filterFccLogsData = async (data) => {
 
 const recordFile = async (data, fileName) => {
   await fs.writeFile(
-    `${resultsDirectory}/{fileName}`,
+    `${resultsDirectory}/${fileName}`,
     JSON.stringify(data),
     (err) => { if (err !== null) console.log(err); },
   );
