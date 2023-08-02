@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-// fs.readFileSync(path.resolve(`${srcDirectory}/${fileName}`), 'utf-8')
 const resultsDirectory = 'results';
 const srcDirectory = 'src';
 const srcFileDict = fs
   .readdirSync(srcDirectory)
+  .filter((x) => (['json', 'har'].includes(x.substring(x.lastIndexOf('.') + 1))))
   .map((fileName) => (
     {
       fileName,
