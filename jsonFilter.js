@@ -85,7 +85,9 @@ const filterData = ((filterFunc, purpose) => {
   srcFileDict.forEach(({ fileName, fileData }) => {
     filterFunc(fileData)
       .then((result) => {
-        recordFile(result, `filtered-for-${purpose}-${fileName}`);
+        const resultFileNameEnding = `${fileName.substring(0, fileName.lastIndexOf('.'))}.json`;
+        const resultFileName = `filtered-for-${purpose}-${resultFileNameEnding}`;
+        recordFile(result, resultFileName);
       });
   });
 });
